@@ -6,7 +6,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "links.papareact.com",
-        port: "",
         pathname: "/**",
       },
     ],
