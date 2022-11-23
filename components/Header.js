@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/legacy/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import {
+  Bars3Icon,
+  GlobeAltIcon,
+  MagnifyingGlassIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
 
 const Header = () => {
   return (
@@ -26,7 +31,15 @@ const Header = () => {
       </div>
 
       {/* Right */}
-      <div></div>
+      <div className="flex items-center justify-end space-x-4 text-gray-500">
+        <p className="hidden cursor-pointer md:inline">Become a host</p>
+        <GlobeAltIcon className="h-6 cursor-pointer" />
+
+        <div className="flex items-center p-2 space-x-2 border-2 rounded-full">
+          <Bars3Icon className="h-6" />
+          <UserCircleIcon className="h-6" />
+        </div>
+      </div>
     </header>
   );
 };
