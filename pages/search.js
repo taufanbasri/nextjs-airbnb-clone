@@ -3,9 +3,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import https from "https";
+import InfoCard from "../components/InfoCard";
 
-const Search = () => {
+const Search = ({ searchResults }) => {
   const router = useRouter();
+
+  console.log(searchResults);
 
   const { location, startDate, endDate, noOfGuest } = router.query;
 
@@ -33,6 +37,23 @@ const Search = () => {
             <p className="button">Rooms and Beds</p>
             <p className="button">More filters</p>
           </div>
+
+          <div className="flex flex-col">
+            {searchResults.map(
+              ({ img, location, title, description, star, price, total }) => (
+                <InfoCard
+                  key={title}
+                  img={img}
+                  location={location}
+                  title={title}
+                  description={description}
+                  star={star}
+                  price={price}
+                  total={total}
+                />
+              )
+            )}
+          </div>
         </section>
       </main>
 
@@ -42,3 +63,19 @@ const Search = () => {
 };
 
 export default Search;
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+export const getServerSideProps = async () => {
+  const searchResults = await fetch("https://jsonkeeper.com/b/5NPS", {
+    agent: httpsAgent,
+  }).then((res) => res.json());
+
+  return {
+    props: {
+      searchResults,
+    },
+  };
+};
